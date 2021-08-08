@@ -624,13 +624,13 @@ video {
 }
 
 /* .btn {
-  @apply px-4 py-2 pg-blue-600 text-white rounded;
-} */
+    @apply px-4 py-2 text-white rounded;
+  } */
 
-/* work */
+/* not work */
 
 /* .btn {
-  @apply px-4 py-2 text-white rounded;
+  @apply px-4 py-2 pg-blue-600 text-white rounded;
 } */
 
 .sr-only {
