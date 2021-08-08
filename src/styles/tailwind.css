@@ -1,0 +1,17 @@
+/* styles folder/styles.css -> postcss add into css output file */
+@tailwind base;
+
+@tailwind components;
+
+/* .btn {
+  @apply px-4 py-2 pg-blue-600 text-white rounded;
+} */
+
+ /* work */
+/* .btn {
+  @apply px-4 py-2 text-white rounded;
+} */
+
+
+
+@tailwind utilities;
