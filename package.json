@@ -12,6 +12,7 @@
     "@types/react": "^17.0.16",
     "@types/react-dom": "^17.0.9",
     "@types/react-router-dom": "^5.1.8",
+    "apollo": "^2.33.4",
     "autoprefix": "^1.0.1",
     "autoprefixer": "^10.3.1",
     "graphql": "^15.5.1",
