@@ -9,6 +9,7 @@ function App() {
 //   node_modules/apollo-language-server/node_modules/graphql: 14.7.0
 // node_modules/@apollo/client/utilities/graphql 15.5.1
 // node_modules/graphql 15.5.1
+// start2: apollo.config.ts --isolatedModules
   const isLoggedIn = useReactiveVar(isLoggedInVar);
   return isLoggedIn ? <LoggedInRouter /> : <LoggedOutRouter />;
 }

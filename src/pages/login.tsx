@@ -21,7 +21,7 @@ interface ILoginForm {
 
 export const Login = () => {
 
-    const { register, getValues, watch, formState: { errors }, handleSubmit } = useForm<ILoginForm>();
+    const { register, watch, formState: { errors }, handleSubmit } = useForm<ILoginForm>();
     const variables = {
         loginInput: {
             email: watch("email"),
@@ -30,24 +30,30 @@ export const Login = () => {
     };
     const onCompleted = (data: loginMutation) => {
         const { login: { ok, error, token } } = data;
+        // data: response from backend
         if (ok) {
             console.log(token);
         }
         if (error) {
+            //error field return from backend ex: user not found
             console.log("onCompleted " + error);
         }
     };
     const onError = (error: ApolloError) => {
+        // error while call backend api ex: 
         console.log("onError: " + error);
     };
 
-    const [loginMutation, { data: loginMutationResult }] = useMutation<loginMutation, loginMutationVariables>(
+    const [loginMutation, { data: loginMutationResult, loading }] = useMutation<loginMutation, loginMutationVariables>(
         LOGIN_MUTATION,
         { variables, onCompleted, onError }
+        // loginMutationResult: response from backend -> pass to onCompleted
     );
 
     const onSubmit = () => {
-        loginMutation();
+        if(!loading) {
+            loginMutation();
+        }
     };
 
     return <div className=" h-screen flex items-center justify-center bg-gray-800 ">
@@ -79,7 +85,9 @@ export const Login = () => {
                 {errors.password?.message && (
                     <FormError errorMessage={errors.password?.message} />
                 )}
-                <button className="btn mt-3">Log In</button>
+                <button className="btn mt-3">
+                    {loading ? "Loading..." : "Log In"}
+                </button>
                 {loginMutationResult?.login.error &&
                     (<FormError errorMessage={loginMutationResult?.login.error} />)
                 }
