@@ -3,6 +3,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { FormError } from "../components/form-error";
 import { loginMutation, loginMutationVariables } from "../__generated__/loginMutation";
+import nuberLogo from "../images/logo.svg";
 
 const LOGIN_MUTATION = gql`
     mutation loginMutation($loginInput: LoginInput!) {
@@ -51,48 +52,50 @@ export const Login = () => {
     );
 
     const onSubmit = () => {
-        if(!loading) {
+        if (!loading) {
             loginMutation();
         }
     };
 
-    return <div className=" h-screen flex items-center justify-center bg-gray-800 ">
-        <div className="bg-white w-full max-w-lg pt-10 pb-7 rounded-lg text-center">
-            <h3 className="text-2xl text-gray-800">Log In</h3>
-            <form onSubmit={handleSubmit(onSubmit)} className="grid gap-3 mt-5 px-5">
-                <input
-                    {...register("email", { required: "Email is required" })}
-                    required
-                    name="email"
-                    type="email"
-                    placeholder="Email"
-                    className="input"
-                />
-                {errors.email?.message && (
-                    <FormError errorMessage={errors.email?.message} />
-                )}
-                <input
-                    {...register("password", { required: "Password is required" })}
-                    required
-                    name="password"
-                    type="password"
-                    placeholder="Password"
-                    className="input"
-                />
-                {errors.password?.type === "minLength" && (
-                    <FormError errorMessage="Password must be more than 10 chars." />
-                )}
-                {errors.password?.message && (
-                    <FormError errorMessage={errors.password?.message} />
-                )}
-                <button className="btn mt-3">
-                    {loading ? "Loading..." : "Log In"}
-                </button>
-                {loginMutationResult?.login.error &&
-                    (<FormError errorMessage={loginMutationResult?.login.error} />)
-                }
-            </form>
+    return (
+        <div className=" h-screen flex items-center flex-col mt-10 lg:mt-28">
+            <div className="w-full font-medium max-w-screen-sm flex flex-col px-5 items-center">
+                <img src={nuberLogo} className="w-52 mb-5" />
+                <h4 className="w-full text-left text-3xl mb-5">Welcome back</h4>
+                <form onSubmit={handleSubmit(onSubmit)} className="grid gap-3 mt-5 w-full">
+                    <input
+                        {...register("email", { required: "Email is required" })}
+                        required
+                        name="email"
+                        type="email"
+                        placeholder="Email"
+                        className="input"
+                    />
+                    {errors.email?.message && (
+                        <FormError errorMessage={errors.email?.message} />
+                    )}
+                    <input
+                        {...register("password", { required: "Password is required" })}
+                        required
+                        name="password"
+                        type="password"
+                        placeholder="Password"
+                        className="input"
+                    />
+                    {errors.password?.type === "minLength" && (
+                        <FormError errorMessage="Password must be more than 10 chars." />
+                    )}
+                    {errors.password?.message && (
+                        <FormError errorMessage={errors.password?.message} />
+                    )}
+                    <button className="btn">
+                        {loading ? "Loading..." : "Log In"}
+                    </button>
+                    {loginMutationResult?.login.error &&
+                        (<FormError errorMessage={loginMutationResult?.login.error} />)
+                    }
+                </form>
+            </div>
         </div>
-
-    </div>;
+    );
 }

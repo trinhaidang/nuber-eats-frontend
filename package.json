@@ -31,11 +31,11 @@
   },
   "scripts": {
     "tailwind:build": "tailwind build -i ./src/styles/tailwind.css -o ./src/styles/styles.css",
-    "start3": "tailwind:build & react-scripts start",
-    "start2": "npm run apollo:codegen & npm run tailwind:build & react-scripts start ",
     "apollo:codegen": "rimraf src/__generated__ && apollo client:codegen src/__generated__ --target=typescript --outputFlat",
+    "start": "npm run apollo:codegen && npm run tailwind:build && react-scripts start",
+    
     "set-isolated-f": "json -I -f package.json -e \"this.compilerOptions.isolatedModules=false\"",
-    "start": "npm run apollo:codegen && npm run start3",
+
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
