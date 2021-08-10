@@ -21,6 +21,7 @@
     "postcss": "^8.3.6",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-helmet": "^6.1.0",
     "react-hook-form": "^7.12.2",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
@@ -33,9 +34,7 @@
     "tailwind:build": "tailwind build -i ./src/styles/tailwind.css -o ./src/styles/styles.css",
     "apollo:codegen": "rimraf src/__generated__ && apollo client:codegen src/__generated__ --target=typescript --outputFlat",
     "start": "npm run apollo:codegen & npm run tailwind:build & react-scripts start",
-  
     "set-isolated-f": "json -I -f package.json -e \"this.compilerOptions.isolatedModules=false\"",
-
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -57,5 +56,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/react-helmet": "^6.1.2"
   }
 }
