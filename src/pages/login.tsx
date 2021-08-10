@@ -7,7 +7,7 @@ import nuberLogo from "../images/logo.svg";
 import { Button } from "../components/button";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { authToken, isLoggedInVar } from "../apollo";
+import { authTokenVar, isLoggedInVar } from "../apollo";
 import { LOCALSTORAGE_TOKEN } from "../constants";
 
 const LOGIN_MUTATION = gql`
@@ -41,7 +41,7 @@ export const Login = () => {
         if (ok && token) {
             console.log(token);
             localStorage.setItem(LOCALSTORAGE_TOKEN, token);
-            authToken(token);
+            authTokenVar(token);
             isLoggedInVar(true);
         }
         if (error) {
