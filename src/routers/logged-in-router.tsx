@@ -2,13 +2,22 @@ import React from "react";
 import { isLoggedInVar } from "../apollo";
 import { ApolloError, gql, useMutation, useQuery } from "@apollo/client";
 import { meQuery } from "../__generated__/meQuery";
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+import { UserRole } from "../__generated__/globalTypes";
+import { Restaurants } from "../pages/client/restaurants";
+
+const ClientRoutes = [
+    <Route path="/" exact>
+        <Restaurants />
+    </Route>
+];
 
 const ME_QUERY = gql`
     query meQuery {
         me {
             id
             email
-            role
+            role 
             verified
         }
     }
@@ -26,9 +35,12 @@ export const LoggedInRouter = () => {
     }
 
     return (
-        <div>
-            <h1>{data.me.role}</h1>
-            {/* <button onClick={() => isLoggedInVar(false)}>Log Out</button> */}
-        </div>
+            <Router>
+                <Switch>
+                    {data.me.role === UserRole.Client && ClientRoutes}
+                    <Redirect to="/" />
+                </Switch>
+
+            </Router>
     );
 };
