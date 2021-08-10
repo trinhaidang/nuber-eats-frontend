@@ -1,11 +1,8 @@
-import React from "react";
-import { isLoggedInVar } from "../apollo";
-import { ApolloError, gql, useMutation, useQuery } from "@apollo/client";
-import { meQuery } from "../__generated__/meQuery";
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import { UserRole } from "../__generated__/globalTypes";
 import { Restaurants } from "../pages/client/restaurants";
 import { Header } from "../components/header";
+import { useMe } from "../hooks/useMe";
 
 const ClientRoutes = [
     <Route path="/" exact>
@@ -13,19 +10,9 @@ const ClientRoutes = [
     </Route>
 ];
 
-const ME_QUERY = gql`
-    query meQuery {
-        me {
-            id
-            email
-            role 
-            verified
-        }
-    }
-`;
 
 export const LoggedInRouter = () => {
-    const { data, loading, error } = useQuery<meQuery>(ME_QUERY);
+    const { data, loading, error } = useMe();
 
     if (!data || loading || error) {
         return (
