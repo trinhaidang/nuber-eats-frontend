@@ -3,10 +3,16 @@ import { UserRole } from "../__generated__/globalTypes";
 import { Restaurants } from "../pages/client/restaurants";
 import { Header } from "../components/header";
 import { useMe } from "../hooks/useMe";
+import { CreateAccount } from "../pages/create-account";
+import { NotFound } from "../pages/404";
+import { ConfirmEmail } from "../pages/user/confirm-email";
 
 const ClientRoutes = [
     <Route path="/" exact>
         <Restaurants />
+    </Route>,
+    <Route path="/confirm" exact>
+        <ConfirmEmail />
     </Route>
 ];
 
@@ -23,13 +29,15 @@ export const LoggedInRouter = () => {
     }
 
     return (
-            <Router>
-                <Header />
-                <Switch>
-                    {data.me.role === UserRole.Client && ClientRoutes}
-                    <Redirect to="/" />
-                </Switch>
+        <Router>
+            <Header />
+            <Switch>
+                {data.me.role === UserRole.Client && ClientRoutes}
+                <Route>
+                    <NotFound />
+                </Route>
+            </Switch>
 
-            </Router>
+        </Router>
     );
 };
