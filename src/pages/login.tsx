@@ -4,6 +4,8 @@ import { useForm } from "react-hook-form";
 import { FormError } from "../components/form-error";
 import { loginMutation, loginMutationVariables } from "../__generated__/loginMutation";
 import nuberLogo from "../images/logo.svg";
+import { Button } from "../components/button";
+import { Link } from "react-router-dom";
 
 const LOGIN_MUTATION = gql`
     mutation loginMutation($loginInput: LoginInput!) {
@@ -22,7 +24,8 @@ interface ILoginForm {
 
 export const Login = () => {
 
-    const { register, watch, formState: { errors }, handleSubmit } = useForm<ILoginForm>();
+    const { register, watch, formState: { isValid, errors }, handleSubmit }
+        = useForm<ILoginForm>({ mode: "onChange" });
     const variables = {
         loginInput: {
             email: watch("email"),
@@ -62,7 +65,7 @@ export const Login = () => {
             <div className="w-full font-medium max-w-screen-sm flex flex-col px-5 items-center">
                 <img src={nuberLogo} className="w-52 mb-5" />
                 <h4 className="w-full text-left text-3xl mb-5">Welcome back</h4>
-                <form onSubmit={handleSubmit(onSubmit)} className="grid gap-3 mt-5 w-full">
+                <form onSubmit={handleSubmit(onSubmit)} className="grid gap-3 mt-5 w-full mb-5">
                     <input
                         {...register("email", { required: "Email is required" })}
                         required
@@ -88,13 +91,17 @@ export const Login = () => {
                     {errors.password?.message && (
                         <FormError errorMessage={errors.password?.message} />
                     )}
-                    <button className="btn">
-                        {loading ? "Loading..." : "Log In"}
-                    </button>
+                    <Button canClick={isValid} loading={loading} actionText="Log In" />
                     {loginMutationResult?.login.error &&
                         (<FormError errorMessage={loginMutationResult?.login.error} />)
                     }
                 </form>
+                <div>
+                    New to Nuber?{" "}
+                    <Link to="/create-account" className="text-lime-500 hover:underline">
+                        Create an Account
+                    </Link>
+                </div>
             </div>
         </div>
     );
