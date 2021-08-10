@@ -8,7 +8,7 @@ import { Button } from "../components/button";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { authTokenVar, isLoggedInVar } from "../apollo";
-import { LOCALSTORAGE_TOKEN } from "../constants";
+import { EMAIL_REGEX, LOCALSTORAGE_TOKEN } from "../constants";
 
 const LOGIN_MUTATION = gql`
     mutation loginMutation($loginInput: LoginInput!) {
@@ -80,7 +80,7 @@ export const Login = () => {
                             "email", 
                             { 
                                 required: "Email is required", 
-                                pattern:/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+                                pattern: EMAIL_REGEX,
                             }
                         )
                         }

@@ -17,7 +17,7 @@ const VERIFY_EMAIL_MUTATION = gql`
 export const ConfirmEmail = () => {
 
     // if response ok, overwrite User object in cache
-    const { data: userData } = useMe();
+    const { data: userData, refetch } = useMe();
     const client = useApolloClient();
     const history = useHistory();
     const onCompleted = (data: verifyEmail) => {

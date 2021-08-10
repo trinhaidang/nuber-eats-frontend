@@ -8,6 +8,7 @@ import { Link, useHistory } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { createAccountMutation, createAccountMutationVariables } from "../__generated__/createAccountMutation";
 import { UserRole } from "../__generated__/globalTypes";
+import { EMAIL_REGEX } from "../constants";
 
 const CREAT_ACCOUNT_MUTATION = gql`
     mutation createAccountMutation($createAccountInput: CreateAccountInput!) {
@@ -79,7 +80,7 @@ export const CreateAccount = () => {
                             "email",
                             {
                                 required: "Email is required",
-                                pattern: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+                                pattern: EMAIL_REGEX,
                             }
                         )
                         }
