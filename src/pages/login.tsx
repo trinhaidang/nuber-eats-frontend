@@ -7,6 +7,7 @@ import nuberLogo from "../images/logo.svg";
 import { Button } from "../components/button";
 import { Link } from "react-router-dom";
 import Helmet from "react-helmet";
+import { isLoggedInVar } from "../apollo";
 
 const LOGIN_MUTATION = gql`
     mutation loginMutation($loginInput: LoginInput!) {
@@ -38,6 +39,7 @@ export const Login = () => {
         // data: response from backend
         if (ok) {
             console.log(token);
+            isLoggedInVar(true);
         }
         if (error) {
             //error field return from backend ex: user not found
@@ -71,7 +73,14 @@ export const Login = () => {
                 <h4 className="w-full text-left text-3xl mb-5">Welcome back</h4>
                 <form onSubmit={handleSubmit(onSubmit)} className="grid gap-3 mt-5 w-full mb-5">
                     <input
-                        {...register("email", { required: "Email is required" })}
+                        {   ...register(
+                            "email", 
+                            { 
+                                required: "Email is required", 
+                                pattern:/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+                            }
+                        )
+                        }
                         required
                         name="email"
                         type="email"
@@ -80,6 +89,9 @@ export const Login = () => {
                     />
                     {errors.email?.message && (
                         <FormError errorMessage={errors.email?.message} />
+                    )}
+                    {errors.email?.type === "pattern" && (
+                        <FormError errorMessage={"Please enter a valid email"} />
                     )}
                     <input
                         {...register("password", { required: "Password is required" })}
