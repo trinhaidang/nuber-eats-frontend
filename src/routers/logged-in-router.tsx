@@ -7,16 +7,20 @@ import { CreateAccount } from "../pages/create-account";
 import { NotFound } from "../pages/404";
 import { ConfirmEmail } from "../pages/user/confirm-email";
 import { EditProfile } from "../pages/user/edit-profile";
+import { SearchRestaurant } from "../pages/client/search";
 
 const ClientRoutes = [
     <Route key={1} path="/" exact>
         <Restaurants />
     </Route>,
-    <Route key={2} path="/confirm" exact>
+    <Route key={2} path="/confirm" >
         <ConfirmEmail />
     </Route>,
-    <Route key={3} path="/edit-profile" exact>
+    <Route key={3} path="/edit-profile" >
         <EditProfile />
+    </Route>,
+    <Route key={4} path="/search" >
+        <SearchRestaurant />
     </Route>
 ];
 
