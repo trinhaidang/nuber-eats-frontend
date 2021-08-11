@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import { Link, useHistory } from "react-router-dom";
+import { CATEGORY_COVERIMG_DEFAUT, RESTAURANT_COVERIMG_DEFAUT } from "../../common/constants";
 import { capitalizeAllWords, capitalizeFirstLetter } from "../../common/utility";
 import { Restaurant } from "../../components/restaurant";
 import { RESTAURANTS_QUERY } from "../../gql/gql-query";
@@ -67,7 +68,7 @@ export const Restaurants = () => {
                     {/* Categories list */}
                     <div className="flex justify-around max-w-sm mx-auto">
                         {data?.allCategories.categories?.map((category) => {
-                            const img = category.coverImg ? category.coverImg : "/images/categories/default.png";
+                            const img = category.coverImg || CATEGORY_COVERIMG_DEFAUT;
                             return (
                                 <Link key={category.id} to={`/category/${category.slug}`}>
                                     <div className="group flex flex-col items-center cursor-pointer">
@@ -86,7 +87,7 @@ export const Restaurants = () => {
                     {/* Restaurants list */}
                     <div className="mt-16 grid md:grid-cols-3 gap-x-5 gap-y-10">
                         {data?.restaurants.results?.map((restaurant) => {
-                            const img = restaurant.coverImg ? restaurant.coverImg : "/images/restaurants/default.jpg";
+                            const img = restaurant.coverImg || RESTAURANT_COVERIMG_DEFAUT;
                             return (
                                 <Restaurant key={restaurant.id} id={restaurant.id + ""} name={restaurant.name} categoryName={restaurant.category?.name} coverImg={img} />
                             );
