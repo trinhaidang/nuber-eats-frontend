@@ -94,3 +94,16 @@ export const CATEGORY_QUERY = gql`
     ${RESTAURANT_FRAGMENT}
     ${CATEGORY_FRAGMENT}
 `;
+
+export const RESTAURANT_QUERY = gql`
+    query restaurant($input: RestaurantInput!) {
+        restaurant(input: $input) {
+            ok
+            error
+            restaurant {
+                ...RestaurantParts
+            }
+        }
+    }
+    ${RESTAURANT_FRAGMENT}
+`;

@@ -3,7 +3,7 @@ import { UserRole } from "../__generated__/globalTypes";
 import { Restaurants } from "../pages/client/restaurants";
 import { Header } from "../components/header";
 import { useMe } from "../hooks/useMe";
-import { CreateAccount } from "../pages/create-account";
+import { Restaurant } from "../pages/client/restaurant";
 import { NotFound } from "../pages/404";
 import { ConfirmEmail } from "../pages/user/confirm-email";
 import { EditProfile } from "../pages/user/edit-profile";
@@ -25,6 +25,9 @@ const ClientRoutes = [
     </Route>,
     <Route key={5} path="/category/:slug" >    
         <Category />
+    </Route>,
+    <Route key={6} path="/restaurants/:id" >    
+        <Restaurant />
     </Route>
 ];
 
