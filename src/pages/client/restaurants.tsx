@@ -33,9 +33,9 @@ export const Restaurants = () => {
                         {data?.allCategories.categories?.map((category) => {
                             const img = images_folder + (category.coverImg ? category.coverImg : "categories/default.png");
                             return (
-                                <div className="flex flex-col items-center cursor-pointer">
+                                <div className="group flex flex-col items-center cursor-pointer">
                                 <div
-                                    className="w-14 h-14 bg-cover hover:bg-gray-100 rounded-full "
+                                    className="w-16 h-14 bg-cover group-hover:bg-gray-100 rounded-full "
                                     style={{backgroundImage: `url(${img})` ,}}
                                 >
                                 </div>
@@ -44,9 +44,22 @@ export const Restaurants = () => {
                             );
                         })}
                     </div>
+                    
                     {/* Restaurants list */}
-                    <div>
-
+                    <div className="mt-10 grid grid-cols-3 gap-x-5 gap-y-10">
+                        {data?.restaurants.results?.map((restaurant) => {
+                            const img = images_folder + (restaurant.coverImg ? restaurant.coverImg : "restaurants/default.jpg");
+                            return (
+                                <div>
+                                    <div 
+                                        className="bg-red-500 bg-cover bg-center mb-3 py-28"
+                                        style={{backgroundImage: `url(${img})` ,}}
+                                    ></div>
+                                    <h3 className="text-xl font-medium">{restaurant.name}</h3>
+                                    <span className="border-t-2 border-gray-200">{restaurant.category?.name}</span>
+                                </div>
+                            );
+                        })}
                     </div>
                 </div>
             }
