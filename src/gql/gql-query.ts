@@ -1,4 +1,5 @@
 import { gql } from "@apollo/client";
+import { RESTAURANT_FRAGMENT } from "../gql/fragments";
 
 export const LOGIN_MUTATION = gql`
 mutation loginMutation($loginInput: LoginInput!) {
@@ -56,15 +57,24 @@ export const RESTAURANTS_QUERY = gql`
             totalPages
             totalResults
             results {
-                id
-                name
-                coverImg
-                category {
-                    name
-                }
-                address
-                isPromoted
+                ...RestaurantParts
             }
         }
     }
+    ${RESTAURANT_FRAGMENT}
+`;
+
+export const SEARCH_RESTAURANT = gql`
+    query searchRestaurant($input: SearchRestaurantInput!) {
+        searchRestaurant(input: $input) {
+            ok
+            error
+            totalPages
+            totalResults 
+            restaurants {
+                ...RestaurantParts
+            }
+        }
+    }
+    ${RESTAURANT_FRAGMENT}
 `;

@@ -1,5 +1,6 @@
 import { useQuery } from "@apollo/client";
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import { capitalizeAllWords, capitalizeFirstLetter } from "../../common/utility";
@@ -28,21 +29,24 @@ export const Restaurants = () => {
 
     /*--- search func  ---*/
     interface IFormProps {
-        searchText: string;
+        searchTerm: string;
     }
     const history = useHistory();
 
     const { register, getValues, handleSubmit } = useForm<IFormProps>();
     const onSearchSubmit = () => {
-        const { searchText } = getValues();
+        const { searchTerm } = getValues();
         history.push({
             pathname: "/search",
-            search: `?term=${searchText}`,
+            search: `?term=${searchTerm}`,
         });
     };
 
     return (
         <div className="mx-5">
+            <Helmet>
+                <title>Home | Nuber Eats</title>
+            </Helmet>
             {/* Banner & search form */}
             <form
                 onSubmit={handleSubmit(onSearchSubmit)}
@@ -50,8 +54,8 @@ export const Restaurants = () => {
                 className="bg-gray-800 w-full py-40 flex items-center justify-center"
             >
                 <input
-                    {...register("searchText", { required: true, min: 3 })}
-                    name="searchText"
+                    {...register("searchTerm", { required: true, min: 3 })}
+                    name="searchTerm"
                     type="Search"
                     className="input rounded-md border-0 w-3/4 md:w-3/12"
                     placeholder="Search restaurants..."
