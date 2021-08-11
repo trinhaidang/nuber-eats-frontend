@@ -8,7 +8,7 @@ import { Button } from "../components/button";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { authTokenVar, isLoggedInVar } from "../apollo";
-import { EMAIL_REGEX, LOCALSTORAGE_TOKEN } from "../constants";
+import { EMAIL_REGEX, LOCALSTORAGE_TOKEN } from "../common/constants";
 import { LOGIN_MUTATION } from "../gql/gql-query";
 
 interface ILoginForm {

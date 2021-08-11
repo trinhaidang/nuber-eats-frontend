@@ -3,7 +3,7 @@ import { watch } from "fs";
 import { useForm } from "react-hook-form";
 import { Button } from "../../components/button";
 import { FormError } from "../../components/form-error";
-import { EMAIL_REGEX } from "../../constants";
+import { EMAIL_REGEX } from "../../common/constants";
 import { useMe } from "../../hooks/useMe";
 import { editProfile, editProfileVariables } from "../../__generated__/editProfile";
 import { Helmet } from "react-helmet-async";

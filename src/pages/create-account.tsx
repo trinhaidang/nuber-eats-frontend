@@ -8,7 +8,7 @@ import { Link, useHistory } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { createAccountMutation, createAccountMutationVariables } from "../__generated__/createAccountMutation";
 import { UserRole } from "../__generated__/globalTypes";
-import { EMAIL_REGEX } from "../constants";
+import { EMAIL_REGEX } from "../common/constants";
 import { CREATE_ACCOUNT_MUTATION } from "../gql/gql-query";
 
 
