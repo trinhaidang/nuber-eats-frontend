@@ -2,7 +2,7 @@ import { useQuery } from "@apollo/client";
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { capitalizeAllWords, capitalizeFirstLetter } from "../../common/utility";
 import { Restaurant } from "../../components/restaurant";
 import { RESTAURANTS_QUERY } from "../../gql/gql-query";
@@ -69,14 +69,16 @@ export const Restaurants = () => {
                         {data?.allCategories.categories?.map((category) => {
                             const img = category.coverImg ? category.coverImg : "/images/categories/default.png";
                             return (
-                                <div key={category.id} className="group flex flex-col items-center cursor-pointer">
-                                    <div
-                                        className="w-16 h-14 bg-cover group-hover:bg-gray-200 rounded-full "
-                                        style={{ backgroundImage: `url(${img})`, }}
-                                    >
+                                <Link key={category.id} to={`/category/${category.slug}`}>
+                                    <div className="group flex flex-col items-center cursor-pointer">
+                                        <div
+                                            className="w-16 h-14 bg-cover group-hover:bg-gray-200 rounded-full "
+                                            style={{ backgroundImage: `url(${img})`, }}
+                                        >
+                                        </div>
+                                        <span className="mt-1 text-sm text-center font-medium">{capitalizeAllWords(category.name)}</span>
                                     </div>
-                                    <span className="mt-1 text-sm text-center font-medium">{capitalizeAllWords(category.name)}</span>
-                                </div>
+                                </Link>
                             );
                         })}
                     </div>
