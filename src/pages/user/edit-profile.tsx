@@ -6,15 +6,9 @@ import { FormError } from "../../components/form-error";
 import { EMAIL_REGEX } from "../../constants";
 import { useMe } from "../../hooks/useMe";
 import { editProfile, editProfileVariables } from "../../__generated__/editProfile";
+import { Helmet } from "react-helmet-async";
+import { EDIT_PROFILE_MUTATION } from "../../gql/gql-query";
 
-const EDIT_PROFILE_MUTATION = gql`
-    mutation editProfile($input: EditProfileInput!) {
-        editProfile(input: $input) {
-            ok
-            error
-        }
-    }
-`;
 
 interface IEditProfileFormProps {
     email?: string;
@@ -36,7 +30,7 @@ export const EditProfile = () => {
     const onSubmit = () => {
         const { email, password } = getValues();
         // call mutation
-        if(getValues().password || getValues().email){
+        if (getValues().password || getValues().email) {
             performEditProfile({
                 variables: {
                     input: {
@@ -53,8 +47,8 @@ export const EditProfile = () => {
         const { editProfile: { ok, error } } = editProfileResult;
         if (ok && userData) {
             //after mutation update cache: if email change update user email and verified
-            const {email: newEmail} = getValues();
-            if(userData.me.email !== newEmail){
+            const { email: newEmail } = getValues();
+            if (userData.me.email !== newEmail) {
                 // client.writeFragment({
                 //     id: `User:${userData?.me.id}`,    //whole id in cache vd User:1
                 //     fragment: gql`fragment EditedUser on User { verified email }`,
@@ -65,7 +59,7 @@ export const EditProfile = () => {
         }
         if (error) console.log(error);
     };
-    const [performEditProfile, { data:editResult, loading, error }] = useMutation<editProfile, editProfileVariables>(
+    const [performEditProfile, { data: editResult, loading, error }] = useMutation<editProfile, editProfileVariables>(
         EDIT_PROFILE_MUTATION,
         { onCompleted }
     );
@@ -73,6 +67,9 @@ export const EditProfile = () => {
 
     return (
         <div className="mt-5 flex flex-col justify-center items-center">
+            <Helmet>
+                <title>Edit Profile | Nuber Eats</title>
+            </Helmet>
             <h4 className="font-semibold text-2xl mb-3">Edit Profile</h4>
             <form onSubmit={handleSubmit(onSubmit)} className="grid max-w-screen-sm gap-3 mt-5 w-full mb-5">
                 <input
@@ -90,8 +87,8 @@ export const EditProfile = () => {
                     <FormError errorMessage={error.message} />
                 )}
                 {editResult?.editProfile.error &&
-                        (<FormError errorMessage={editResult?.editProfile.error} />)
-                    }
+                    (<FormError errorMessage={editResult?.editProfile.error} />)
+                }
             </form>
         </div>
     );

@@ -9,16 +9,7 @@ import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { authTokenVar, isLoggedInVar } from "../apollo";
 import { EMAIL_REGEX, LOCALSTORAGE_TOKEN } from "../constants";
-
-const LOGIN_MUTATION = gql`
-    mutation loginMutation($loginInput: LoginInput!) {
-        login(input: $loginInput) {
-            ok
-            token
-            error
-        }
-    }
-`;
+import { LOGIN_MUTATION } from "../gql/gql-query";
 
 interface ILoginForm {
     email: string;

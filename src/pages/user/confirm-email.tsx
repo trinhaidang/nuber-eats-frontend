@@ -4,15 +4,9 @@ import { useHistory } from "react-router-dom";
 import { FormError } from "../../components/form-error";
 import { useMe } from "../../hooks/useMe";
 import { verifyEmail, verifyEmailVariables } from "../../__generated__/verifyEmail";
+import { Helmet } from "react-helmet-async";
+import { VERIFY_EMAIL_MUTATION } from "../../gql/gql-query";
 
-const VERIFY_EMAIL_MUTATION = gql`
-    mutation verifyEmail($input: VerifyEmailInput!) {
-        verifyEmail(input: $input){
-            ok
-            error
-        }
-    }
-`;
 
 export const ConfirmEmail = () => {
 
@@ -52,13 +46,16 @@ export const ConfirmEmail = () => {
 
     return (
         <div className="mt-52 flex flex-col items-center justify-center">
+            <Helmet>
+                <title>Verify Email | Nuber Eats</title>
+            </Helmet>
             <h2 className="text-lg mb-1 font-medium">Confirming email...</h2>
-            <h4 className= "text-gray-700 text-sm">Please wait, don't close this page...</h4>
+            <h4 className="text-gray-700 text-sm">Please wait, don't close this page...</h4>
             {error && (
                 <FormError errorMessage={error.message} />
             )}
             {verifyResult?.verifyEmail.error && (
-                <FormError errorMessage={verifyResult?.verifyEmail.error } />
+                <FormError errorMessage={verifyResult?.verifyEmail.error} />
             )}
         </div>
     );

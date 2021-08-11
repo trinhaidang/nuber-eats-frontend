@@ -9,15 +9,8 @@ import { Helmet } from "react-helmet-async";
 import { createAccountMutation, createAccountMutationVariables } from "../__generated__/createAccountMutation";
 import { UserRole } from "../__generated__/globalTypes";
 import { EMAIL_REGEX } from "../constants";
+import { CREATE_ACCOUNT_MUTATION } from "../gql/gql-query";
 
-const CREAT_ACCOUNT_MUTATION = gql`
-    mutation createAccountMutation($createAccountInput: CreateAccountInput!) {
-        createAccount(input: $createAccountInput) {
-            ok
-            error
-        }
-    }
-`;
 
 interface ICreateAccountForm {
     email: string;
@@ -62,7 +55,7 @@ export const CreateAccount = () => {
     };
 
     const [createAccountMutation, { data: createAccountMutationResult, loading }] = useMutation<createAccountMutation, createAccountMutationVariables>(
-        CREAT_ACCOUNT_MUTATION,
+        CREATE_ACCOUNT_MUTATION,
         { onCompleted, onError }
     );
 
@@ -72,7 +65,7 @@ export const CreateAccount = () => {
                 <title>Create Account | Nuber Eats</title>
             </Helmet>
             <div className="w-full font-medium max-w-screen-sm flex flex-col px-5 items-center">
-                <img src={nuberLogo} className="w-52 mb-5" alt="Nuber Eats"/>
+                <img src={nuberLogo} className="w-52 mb-5" alt="Nuber Eats" />
                 <h4 className="w-full text-left text-3xl mb-5">Let's get started</h4>
                 <form onSubmit={handleSubmit(onSubmit)} className="grid gap-3 mt-5 w-full mb-5">
                     <input
