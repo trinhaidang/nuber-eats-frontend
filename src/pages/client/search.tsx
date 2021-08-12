@@ -54,7 +54,7 @@ export const SearchRestaurant = () => {
 
 
     return (
-        <div>
+        <div className="mx-5">
             <Helmet>
                 <title>Search | Nuber Eats</title>
             </Helmet>

@@ -13,11 +13,11 @@ export const LoggedOutRouter = () => {
             <Route path="/create-account">
                 <CreateAccount />
             </Route>
-            <Route path="/" exact>
-                <Login />
-            </Route>
             <Route path="/confirm" exact>
                 <ConfirmEmail />
+            </Route>
+            <Route path="/" exact>
+                <Login />
             </Route>
             <Route>
                 <NotFound />

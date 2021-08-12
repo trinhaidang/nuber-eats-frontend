@@ -9,6 +9,7 @@ import { ConfirmEmail } from "../pages/user/confirm-email";
 import { EditProfile } from "../pages/user/edit-profile";
 import { SearchRestaurant } from "../pages/client/search";
 import { Category } from "../pages/client/category";
+import { Logout } from "../pages/user/logout";
 
 const ClientRoutes = [
     <Route key={1} path="/" exact>
@@ -29,6 +30,10 @@ const ClientRoutes = [
     <Route key={6} path="/restaurants/:id" >    
         <Restaurant />
     </Route>
+    // ,
+    // <Route key={7} path="/logout" >    
+    //     <Logout />
+    // </Route>
 ];
 
 

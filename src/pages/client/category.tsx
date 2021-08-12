@@ -4,8 +4,9 @@ import { CATEGORY_QUERY } from "../../gql/gql-query";
 import { category, categoryVariables } from "../../__generated__/category";
 import { Helmet } from "react-helmet-async";
 import { useState } from "react";
-import { RESTAURANT_COVERIMG_DEFAUT } from "../../common/constants";
+import { CATEGORY_COVERIMG_DEFAUT, RESTAURANT_COVERIMG_DEFAUT } from "../../common/constants";
 import { RestaurantItem } from "../../components/restaurant";
+import { capitalizeAllWords } from "../../common/utility";
 
 
 interface ICategoryParams {
@@ -34,11 +35,20 @@ export const Category = () => {
     const onPreviousPageClick = () => setPage((current) => current - 1);
 
     return (
-        <div>
+        <div className="mx-5">
             <Helmet>
                 <title>Category | Nuber Eats</title>
             </Helmet>
-            {data?.category.category?.name}
+
+            <div 
+                className="bg-gray-800 bg-center py-40"
+                style={{ backgroundImage: `url(${data?.category.category?.coverImg || CATEGORY_COVERIMG_DEFAUT})` }}
+            >
+                <div className="bg-white md:w-3/12 w-3/4 py-8 px-4">
+                    <h4 className="text-4xl mb-3">{capitalizeAllWords(data?.category.category?.name)}</h4>
+                </div>
+            </div>
+
             {/* Restaurants list */}
             <div className="mt-16 grid md:grid-cols-3 gap-x-5 gap-y-10">
                 {data?.category.restaurants?.map((restaurant) => {

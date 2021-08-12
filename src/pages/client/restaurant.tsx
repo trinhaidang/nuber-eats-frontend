@@ -31,7 +31,7 @@ export const Restaurant = () => {
                 <title>Restaurant | Nuber Eats</title>
             </Helmet>
             <div 
-                className="bg-red-500 bg-center py-40"
+                className="bg-gray-800 bg-center py-40"
                 style={{ backgroundImage: `url(${data?.restaurant.restaurant?.coverImg || RESTAURANT_COVERIMG_DEFAUT})` }}
             >
                 <div className="bg-white md:w-3/12 w-3/4 py-8 px-4">
