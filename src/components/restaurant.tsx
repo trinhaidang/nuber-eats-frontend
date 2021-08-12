@@ -10,7 +10,7 @@ interface IRestaurantProps {
 }
 
 
-export const Restaurant: React.FC<IRestaurantProps> = ({ id, name, categoryName, coverImg }) => (
+export const RestaurantItem: React.FC<IRestaurantProps> = ({ id, name, categoryName, coverImg }) => (
     <Link to={`/restaurants/${id}`}>
         <div className="flex flex-col">
             <div
