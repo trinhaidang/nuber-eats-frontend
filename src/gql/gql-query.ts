@@ -1,6 +1,17 @@
 import { gql } from "@apollo/client";
 import { CATEGORY_FRAGMENT, RESTAURANT_FRAGMENT } from "../gql/fragments";
 
+export const ME_QUERY = gql`
+query meQuery {
+    me {
+        id
+        email
+        role 
+        verified
+    }
+}
+`;
+
 export const LOGIN_MUTATION = gql`
 mutation loginMutation($loginInput: LoginInput!) {
     login(input: $loginInput) {

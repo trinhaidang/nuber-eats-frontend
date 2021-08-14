@@ -4,20 +4,20 @@ import { capitalizeAllWords } from "../common/utility";
 import { Link } from "react-router-dom";
 import {restaurantsPageQuery_allCategories_categories} from "../__generated__/restaurantsPageQuery";
 
-interface ICategoriesParams {
+interface ICategoriesProps {
     categories: restaurantsPageQuery_allCategories_categories[] | null | undefined;
     currentCategoryId: Number | null ;
 }
 
-export const Categories: React.FC<ICategoriesParams> = ({categories, currentCategoryId}) => (
-    <div className="flex justify-around  mx-auto overflow-scroll">
+export const Categories: React.FC<ICategoriesProps> = ({categories, currentCategoryId}) => (
+    <div className="flex justify-between mx-auto overflow-auto">
         {categories?.map((category) => {
             const img = category.coverImg || CATEGORY_COVERIMG_DEFAUT;
             return (
                 <Link key={category.id} to={`/category/${category.slug}`}>
-                    <div className="group flex flex-col items-center cursor-pointer">
+                    <div className=" group flex flex-col items-center cursor-pointer ">
                         <div
-                            className={"w-16 h-14 bg-cover group-hover:bg-gray-200 rounded-full " + (currentCategoryId === category.id ? "bg-gray-300" : "") }
+                            className={"mx-2 w-16 h-14 bg-cover group-hover:bg-gray-200 rounded-full " + (currentCategoryId === category.id ? "bg-gray-300" : "") }
                             style={{ backgroundImage: `url(${img})`, }}
                         >
                         </div>

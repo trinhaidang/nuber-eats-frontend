@@ -10,27 +10,27 @@ export const Header = () => {
     const { data } = useMe();
     return (
         <>
-    {!data?.me.verified && (
-        <div className="bg-red-500 p-3 text-center text-base text-white">
-            <span>Please verify your email.</span>
-        </div>
-    )}
-        <header className="py-4">
-            <div className="w-full px-5 xl:px-0 max-w-screen-2xl mx-auto flex justify-between items-center">
-                <img src={nuberLogo} className="w-36" alt="Nuber Eats" />
-                <div className="flex justify-between text-xs">
-                    <Link to="/">
-                        <FontAwesomeIcon icon={faStore} className="text-lg mx-4" />{" "}
-                    </Link>
-                    <Link to="/edit-profile/">
-                        <FontAwesomeIcon icon={faUser} className="text-lg mx-2" />{" "}
-                    </Link>
-                    {/* <Link to="/logout">
+            {!data?.me.verified && (
+                <div className="bg-red-500 p-3 text-center text-base text-white">
+                    <span>Please verify your email.</span>
+                </div>
+            )}
+            <header className="py-4">
+                <div className="w-full px-5 xl:px-0 max-w-screen-2xl mx-auto flex justify-between items-center">
+                    <img src={nuberLogo} className="w-36" alt="Nuber Eats" />
+                    <div className="flex justify-between text-xs">
+                        <Link to="/">
+                            <FontAwesomeIcon icon={faStore} className="text-lg mx-4" />{" "}
+                        </Link>
+                        <Link to="/edit-profile/">
+                            <FontAwesomeIcon icon={faUser} className="text-lg mx-2" />{" "}
+                        </Link>
+                        {/* <Link to="/logout">
                         <FontAwesomeIcon icon={faPowerOff} className="text-lg ml-2" />{" "}
                     </Link> */}
+                    </div>
                 </div>
-            </div>
-        </header>
+            </header>
         </>
     );
 };

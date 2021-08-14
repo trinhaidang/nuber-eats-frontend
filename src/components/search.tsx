@@ -3,15 +3,15 @@ import { useForm } from "react-hook-form";
 import { useHistory, useParams } from "react-router-dom";
 
 
-interface IFormProps {
+interface ISearchFormProps {
     searchTerm: string;
 }
 
-export const SearchForm: React.FC<IFormProps> = ({searchTerm}) => {
+export const SearchForm: React.FC<ISearchFormProps> = ({searchTerm}) => {
     /*--- search func  ---*/
     const history = useHistory();
 
-    const { register, getValues, handleSubmit } = useForm<IFormProps>();
+    const { register, getValues, handleSubmit } = useForm<ISearchFormProps>();
     const onSearchSubmit = () => {
         searchTerm = getValues().searchTerm;
         history.push({
@@ -23,7 +23,7 @@ export const SearchForm: React.FC<IFormProps> = ({searchTerm}) => {
     
     return (
         <form
-            onSubmit={handleSubmit(onSearchSubmit)}
+            onSubmit={onSearchSubmit}
             name="restaurants-search-form"
             className="bg-gray-800 w-full py-40 flex items-center justify-center"
         >
