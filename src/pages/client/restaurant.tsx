@@ -36,7 +36,7 @@ export const Restaurant = () => {
             >
                 <div className="bg-white md:w-3/12 w-3/4 py-8 px-4">
                     <h4 className="text-4xl mb-3">{data?.restaurant.restaurant?.name}</h4>
-                    <h5 className="text-sm font-light mb-2">{capitalizeAllWords(data?.restaurant.restaurant?.category?.name)}</h5>
+                    <h5 className="text-sm font-light mb-2">{capitalizeAllWords(data?.restaurant.restaurant?.category?.name || "")}</h5>
                     <h6 className="text-sm font-light">{data?.restaurant.restaurant?.address}</h6>
                 </div>
             </div>

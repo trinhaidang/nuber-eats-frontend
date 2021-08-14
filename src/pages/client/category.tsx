@@ -45,7 +45,7 @@ export const Category = () => {
                 style={{ backgroundImage: `url(${data?.category.category?.coverImg || CATEGORY_COVERIMG_DEFAUT})` }}
             >
                 <div className="bg-white md:w-3/12 w-3/4 py-8 px-4">
-                    <h4 className="text-4xl mb-3">{capitalizeAllWords(data?.category.category?.name)}</h4>
+                    <h4 className="text-4xl mb-3">{capitalizeAllWords(data?.category.category?.name || "")}</h4>
                 </div>
             </div>
 

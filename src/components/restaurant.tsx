@@ -18,7 +18,7 @@ export const RestaurantItem: React.FC<IRestaurantProps> = ({ id, name, categoryN
                 style={{ backgroundImage: `url(${coverImg})`, }}
             ></div>
             <h3 className="text-xl font-medium">{name}</h3>
-            <span className="border-t mt-3 py-2 text-xs opacity-50 border-gray-400">{capitalizeAllWords(categoryName)}</span>
+            <span className="border-t mt-3 py-2 text-xs opacity-50 border-gray-400">{capitalizeAllWords(categoryName || "")}</span>
         </div>
     </Link>
 );

@@ -18,6 +18,7 @@
     "apollo": "^2.33.4",
     "autoprefix": "^1.0.1",
     "autoprefixer": "^10.3.1",
+    "cypress": "^8.2.0",
     "graphql": "^14.7.0",
     "json": "^11.0.0",
     "jsontool": "^7.0.2",
