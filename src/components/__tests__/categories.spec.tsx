@@ -40,7 +40,7 @@ describe("<Categories />", () => {
         categories.map((cat, index) => {
             expect(container.firstChild?.childNodes[index]).toHaveAttribute("href", `/category/${cat.slug}`);
             expect(container.firstChild?.childNodes[index].childNodes[0].childNodes[0]).toHaveAttribute("style", `background-image: url(${cat.coverImg});`);
-            getByText(capitalizeAllWords(cat.name) || "abc");
+            getByText(capitalizeAllWords(cat.name));
             expect(container.firstChild?.childNodes[index].childNodes[0].childNodes[0]).not.toHaveClass("bg-gray-300");
         })
     });

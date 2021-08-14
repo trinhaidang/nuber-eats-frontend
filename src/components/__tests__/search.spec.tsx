@@ -1,4 +1,4 @@
-import { fireEvent, getByPlaceholderText, getByTestId, render } from "@testing-library/react";
+import { act, fireEvent, getByPlaceholderText, getByTestId, render, waitFor } from "@testing-library/react";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { Router } from "react-router-dom";
@@ -19,7 +19,7 @@ describe("<SearchRestaurant />", () => {
             </BrowserRouter>
         );
         // debug();
-        expect(getByRole('searchbox').getAttribute('placeholder')).toMatch(searchFormProps.searchTerm); 
+        expect(getByRole('searchbox').getAttribute('placeholder')).toMatch(searchFormProps.searchTerm);
     });
 
     it("should render without search term", () => {
@@ -33,10 +33,10 @@ describe("<SearchRestaurant />", () => {
             </BrowserRouter>
         );
         // debug();
-        expect(getByRole('searchbox').getAttribute('placeholder')).toMatch("Search restaurants..."); 
+        expect(getByRole('searchbox').getAttribute('placeholder')).toMatch("Search restaurants...");
     });
 
-    it("should push to search when submit search form", () => {
+    it("should push to search when submit search form", async () => {
         const searchFormProps = {
             searchTerm: "a"
         }
@@ -45,21 +45,27 @@ describe("<SearchRestaurant />", () => {
         global.window = Object.create(window);
         Object.defineProperty(window, "location", {
             value: {
-                reload : () => "location reload",
+                reload: () => "location reload",
             },
             writable: true
         });
 
+        const handleSubmit = (onSearchSubmit: Function) => {
+            onSearchSubmit();
+        }
+
         const history = createMemoryHistory();
+
         const { getByRole } = render(
             <Router history={history}>
                 <SearchForm searchTerm={searchFormProps.searchTerm} />
             </Router>
         );
         const searchText = "b";
-        fireEvent.change(getByRole('searchbox'), { target: { value: "b" } })
-        fireEvent.submit(getByRole('form'))
-        // console.log(history);
+        await act(async () => {
+            fireEvent.change(getByRole('searchbox'), { target: { value: "b" } })
+            fireEvent.submit(getByRole('form'));
+        });
         expect(history.length).toBe(2);
         expect(history.location.pathname).toBe("/search");
         expect(history.location.search).toBe("?term=" + searchText);

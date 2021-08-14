@@ -18,7 +18,7 @@ describe("<Restaurant />", () => {
             </Router>
         );
         getByText(restaurantProps.name);
-        getByText(capitalizeAllWords(restaurantProps.categoryName) || "");  // capitalize category
+        getByText(capitalizeAllWords(restaurantProps.categoryName));  // capitalize category
         expect(container.firstChild).toHaveAttribute("href", `/restaurants/${restaurantProps.id}`);
     })
 })

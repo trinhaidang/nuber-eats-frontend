@@ -13,17 +13,17 @@ export const SearchForm: React.FC<ISearchFormProps> = ({searchTerm}) => {
 
     const { register, getValues, handleSubmit } = useForm<ISearchFormProps>();
     const onSearchSubmit = () => {
-        searchTerm = getValues().searchTerm;
+        const searchText = getValues().searchTerm;
         history.push({
             pathname: "/search",
-            search: `?term=${searchTerm}`,
+            search: `?term=${searchText}`,
         });
-        window.location.reload();
+        // window.location.reload();
     };
     
     return (
         <form
-            onSubmit={onSearchSubmit}
+            onSubmit={handleSubmit(onSearchSubmit)}
             name="restaurants-search-form"
             className="bg-gray-800 w-full py-40 flex items-center justify-center"
         >
