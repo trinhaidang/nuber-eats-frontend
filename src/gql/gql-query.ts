@@ -51,8 +51,8 @@ export const VERIFY_EMAIL_MUTATION = gql`
 
 // -----------------  CLIENT QUERIES -----------------//
 
-export const RESTAURANTS_QUERY = gql`
-    query restaurantsPageQuery($input: RestaurantsInput!) {
+export const CATEGORIES_QUERY = gql`
+    query categoriesQuery {
         allCategories {
             ok
             error
@@ -60,6 +60,12 @@ export const RESTAURANTS_QUERY = gql`
                 ...CategoryParts
             }
         }
+    }
+    ${CATEGORY_FRAGMENT}
+`;
+
+export const RESTAURANTS_QUERY = gql`
+    query restaurantsPageQuery($input: RestaurantsInput!) {
         restaurants(input: $input) {
             ok
             error
@@ -71,8 +77,30 @@ export const RESTAURANTS_QUERY = gql`
         }
     }
     ${RESTAURANT_FRAGMENT}
-    ${CATEGORY_FRAGMENT}
 `;
+
+// export const RESTAURANTS_QUERY = gql`
+//     query restaurantsPageQuery($input: RestaurantsInput!) {
+//         allCategories {
+//             ok
+//             error
+//             categories {
+//                 ...CategoryParts
+//             }
+//         }
+//         restaurants(input: $input) {
+//             ok
+//             error
+//             totalPages
+//             totalResults
+//             results {
+//                 ...RestaurantParts
+//             }
+//         }
+//     }
+//     ${RESTAURANT_FRAGMENT}
+//     ${CATEGORY_FRAGMENT}
+// `;
 
 export const SEARCH_RESTAURANT = gql`
     query searchRestaurant($input: SearchRestaurantInput!) {

@@ -2,10 +2,10 @@ import React from "react";
 import { CATEGORY_COVERIMG_DEFAUT } from "../common/constants";
 import { capitalizeAllWords } from "../common/utility";
 import { Link } from "react-router-dom";
-import {restaurantsPageQuery_allCategories_categories} from "../__generated__/restaurantsPageQuery";
+import { categoriesQuery_allCategories_categories } from "../__generated__/categoriesQuery";
 
 interface ICategoriesProps {
-    categories: restaurantsPageQuery_allCategories_categories[] | null | undefined;
+    categories: categoriesQuery_allCategories_categories[] | null | undefined;
     currentCategoryId: Number | null ;
 }
 
