@@ -16,7 +16,7 @@ interface IEditProfileFormProps {
 }
 
 export const EditProfile = () => {
-    const client = useApolloClient();
+    const user = useApolloClient();
 
     // form action
     const { data: userData, refetch } = useMe();
@@ -49,7 +49,7 @@ export const EditProfile = () => {
             //after mutation update cache: if email change update user email and verified
             const { email: newEmail } = getValues();
             if (userData.me.email !== newEmail) {
-                // client.writeFragment({
+                // user.writeFragment({
                 //     id: `User:${userData?.me.id}`,    //whole id in cache vd User:1
                 //     fragment: gql`fragment EditedUser on User { verified email }`,
                 //     data: { verified: false, email: newEmail },

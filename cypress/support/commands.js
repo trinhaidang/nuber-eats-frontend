@@ -23,3 +23,25 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+import "@testing-library/cypress/add-commands";
+
+
+Cypress.Commands.add("assertLoggedIn", () => {
+    cy.window().its("localStorage.nuber-token").should("be.a", "string");
+});
+
+Cypress.Commands.add("assertLoggedOut", () => {
+    cy.window().its("localStorage.nuber-token").should("be.undefined");
+});
+
+Cypress.Commands.add("login", (email, password) => {
+    cy.assertLoggedOut();
+    cy.visit("/")
+        .get('[name="email"]').type(email)
+        .get('[name="password"]').type(password)
+        .get(".text-lg").should("not.have.class", "pointer-events-none")
+        .click();
+    cy.wait(1000);
+    cy.title().should("eq", "Home | Nuber Eats");
+    cy.assertLoggedIn();
+})

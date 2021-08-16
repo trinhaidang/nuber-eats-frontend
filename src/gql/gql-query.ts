@@ -49,6 +49,8 @@ export const VERIFY_EMAIL_MUTATION = gql`
     }
 `;
 
+// -----------------  CLIENT QUERIES -----------------//
+
 export const RESTAURANTS_QUERY = gql`
     query restaurantsPageQuery($input: RestaurantsInput!) {
         allCategories {
@@ -117,4 +119,31 @@ export const RESTAURANT_QUERY = gql`
         }
     }
     ${RESTAURANT_FRAGMENT}
+`;
+
+
+// -----------------  OWNER QUERIES -----------------//
+
+export const MY_RESTAURANTS_QUERY = gql`
+    query myRestaurantsPageQuery($input: MyRestaurantsInput!) {
+        myRestaurants (input: $input) {
+            ok
+            error
+            totalPages
+            totalResults
+            results {
+                ...RestaurantParts
+            }
+        }
+    }
+    ${RESTAURANT_FRAGMENT}
+`;
+
+export const CREATE_RESTAURANT_MUTATION = gql`
+    mutation createRestaurantMutation($input: CreateRestaurantInput) {
+        createRestaurant(input: $input) {
+            ok
+            error
+        }
+    }
 `;

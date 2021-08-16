@@ -25,9 +25,9 @@ export const Header = () => {
                         <Link to="/edit-profile/">
                             <FontAwesomeIcon icon={faUser} className="text-lg mx-2" />{" "}
                         </Link>
-                        {/* <Link to="/logout">
-                        <FontAwesomeIcon icon={faPowerOff} className="text-lg ml-2" />{" "}
-                    </Link> */}
+                        <Link to="/logout">
+                            <FontAwesomeIcon icon={faPowerOff} className="text-lg ml-2" />{" "}
+                        </Link>
                     </div>
                 </div>
             </header>

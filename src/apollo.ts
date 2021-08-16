@@ -13,7 +13,7 @@ const token = localStorage.getItem(LOCALSTORAGE_TOKEN);
 export const isLoggedInVar = makeVar(Boolean(token));
 export const authTokenVar = makeVar(token);
 
-//set context of every request that client makes
+//set context of every request that user makes
 const authLink = setContext((_, {headers}) => {
     return {
         headers: {
@@ -23,7 +23,7 @@ const authLink = setContext((_, {headers}) => {
     };
 });
 
-export const client = new ApolloClient({
+export const user = new ApolloClient({
     link: authLink.concat(httpLink),
     cache: new InMemoryCache({
         typePolicies: {

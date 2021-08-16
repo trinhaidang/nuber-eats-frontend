@@ -4,12 +4,12 @@ import {App} from './components/app';
 import reportWebVitals from './reportWebVitals';
 import "./styles/styles.css";
 import { ApolloProvider } from "@apollo/client";
-import { client } from './apollo';
+import { user } from './apollo';
 import { HelmetProvider } from "react-helmet-async";
 
 ReactDOM.render(
   <React.StrictMode>
-    <ApolloProvider client={client} >
+    <ApolloProvider client={user} >
       <HelmetProvider>
         <App />
       </HelmetProvider>

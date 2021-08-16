@@ -1,11 +1,13 @@
 import { Link, useHistory } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { Button } from "../../components/button";
-import { authTokenVar, isLoggedInVar } from "../../apollo";
+import { authTokenVar, isLoggedInVar, user } from "../../apollo";
+import { useApolloClient } from "@apollo/client";
 
 
 export const Logout = () => {
     const history = useHistory();
+    const user = useApolloClient();
     return (
     <div className="h-screen flex flex-col items-center justify-center">
         <Helmet>
@@ -15,6 +17,8 @@ export const Logout = () => {
             onClick={() => {
                 isLoggedInVar(false);
                 authTokenVar(null);
+                localStorage.clear();
+                user.clearStore();
                 history.push("/");
             }}>
             Log Out
