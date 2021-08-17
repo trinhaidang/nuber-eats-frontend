@@ -31,6 +31,7 @@ export interface category_category_restaurants {
   category: category_category_restaurants_category | null;
   address: string;
   isPromoted: boolean;
+  isValid: boolean;
 }
 
 export interface category_category {

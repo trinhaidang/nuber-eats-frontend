@@ -1,5 +1,5 @@
-import { useQuery } from "@apollo/client";
-import React, { useState } from "react";
+import { useApolloClient, useQuery } from "@apollo/client";
+import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { RESTAURANT_COVERIMG_DEFAUT } from "../../common/constants";
@@ -48,6 +48,9 @@ export const MyRestaurants = () => {
                     {data?.myRestaurants.ok
                         && data.myRestaurants.totalResults !== 0
                         && <>
+                            <Link className="link" to="/add-restaurant">
+                                Add more restaurants &rarr;
+                            </Link>
 
                             {/*  Restaurants list  */}
                             <div className="mt-16 grid md:grid-cols-3 gap-x-5 gap-y-10">

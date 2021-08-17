@@ -17,7 +17,7 @@ export const Header = () => {
             )}
             <header className="py-4">
                 <div className="w-full px-5 xl:px-0 max-w-screen-2xl mx-auto flex justify-between items-center">
-                    <img src={nuberLogo} className="w-36" alt="Nuber Eats" />
+                <Link to="/"><img src={nuberLogo} className="w-36" alt="Nuber Eats" /></Link>
                     <div className="flex justify-between text-xs">
                         <Link to="/">
                             <FontAwesomeIcon icon={faStore} className="text-lg mx-4" />{" "}

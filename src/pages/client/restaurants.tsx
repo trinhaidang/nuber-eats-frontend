@@ -54,7 +54,7 @@ export const Restaurants = () => {
                     <>
                         {/* Restaurants list */}
                         <div className="mt-16 grid md:grid-cols-3 gap-x-5 gap-y-10">
-                            {resData?.restaurants.results?.map((restaurant) => {
+                            {resData?.restaurants.results?.filter((restaurant) => restaurant.isValid).map((restaurant) => {
                                 const img = restaurant.coverImg || RESTAURANT_COVERIMG_DEFAUT;
                                 return (
                                     <RestaurantItem key={restaurant.id} id={restaurant.id + ""} name={restaurant.name} categoryName={restaurant.category?.name} coverImg={img} />

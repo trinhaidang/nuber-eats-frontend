@@ -31,7 +31,7 @@ export const Restaurant = () => {
                 <title>Restaurant | Nuber Eats</title>
             </Helmet>
             <div 
-                className="bg-gray-800 bg-center py-40"
+                className="bg-gray-800 bg-center py-40 mx-5"
                 style={{ backgroundImage: `url(${data?.restaurant.restaurant?.coverImg || RESTAURANT_COVERIMG_DEFAUT})` }}
             >
                 <div className="bg-white md:w-3/12 w-3/4 py-8 px-4">
@@ -40,6 +40,9 @@ export const Restaurant = () => {
                     <h6 className="text-sm font-light">{data?.restaurant.restaurant?.address}</h6>
                 </div>
             </div>
+            {!data?.restaurant.restaurant?.isValid &&
+            <h2 className="font-semibold text-2xl mb-3 m-5">Service is currently unavailable for this restaurant.</h2>
+            }
         </div>
     );
 }

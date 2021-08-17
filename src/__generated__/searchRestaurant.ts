@@ -22,6 +22,7 @@ export interface searchRestaurant_searchRestaurant_restaurants {
   category: searchRestaurant_searchRestaurant_restaurants_category | null;
   address: string;
   isPromoted: boolean;
+  isValid: boolean;
 }
 
 export interface searchRestaurant_searchRestaurant {

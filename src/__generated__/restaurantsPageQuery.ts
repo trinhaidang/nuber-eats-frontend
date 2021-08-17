@@ -22,6 +22,7 @@ export interface restaurantsPageQuery_restaurants_results {
   category: restaurantsPageQuery_restaurants_results_category | null;
   address: string;
   isPromoted: boolean;
+  isValid: boolean;
 }
 
 export interface restaurantsPageQuery_restaurants {

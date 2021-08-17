@@ -20,4 +20,5 @@ export interface RestaurantParts {
   category: RestaurantParts_category | null;
   address: string;
   isPromoted: boolean;
+  isValid: boolean;
 }

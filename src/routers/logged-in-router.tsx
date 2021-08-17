@@ -12,6 +12,8 @@ import { Category } from "../pages/client/category";
 import { Logout } from "../pages/user/logout";
 import { MyRestaurants } from "../pages/owner/my-restaurants";
 import { AddRestaurant } from "../pages/owner/add-restaurant";
+import { MyRestaurant } from "../pages/owner/my-restaurant";
+import { AddDish } from "../pages/owner/add-dish";
 
 const ClientRoutes = [
     <Route key="/" path="/" exact>
@@ -23,7 +25,7 @@ const ClientRoutes = [
     <Route key="/category/:slug" path="/category/:slug" >
         <Category />
     </Route>,
-    <Route key="/restaurants/:id" path="/restaurants/:id" >
+    <Route key="/restaurant/:id" path="/restaurant/:id" >
         <Restaurant />
     </Route>,
 ];
@@ -46,6 +48,12 @@ const OwnerRoutes = [
     </Route>,
     <Route key="/add-restaurant" path="/add-restaurant" exact>
         <AddRestaurant />
+    </Route>,
+    <Route key="/restaurant/:id" path="/restaurant/:id" exact>
+        <MyRestaurant />
+    </Route>,
+    <Route key="/restaurant/:restaurantId/add-dish" path="/restaurant/:restaurantId/add-dish" exact>
+        <AddDish />
     </Route>,
 ];
 
