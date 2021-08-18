@@ -1,6 +1,7 @@
 import { useQuery } from "@apollo/client";
 import { Helmet } from "react-helmet-async";
 import { Link, useParams } from "react-router-dom"
+import { Dish } from "../../components/dish";
 import { MY_RESTAURANT_QUERY } from "../../gql/gql-query";
 import { myRestaurant, myRestaurantVariables } from "../../__generated__/myRestaurant";
 
@@ -43,7 +44,13 @@ export const MyRestaurant = () => {
                 <div className="mt-10">
                     {data?.myRestaurant.restaurant?.menu.length === 0 ?
                         <h4 className="text-xl mb-5">Please create a dish!</h4> :
-                        null
+                        
+                        <div className="grid mt-16 md:grid-cols-3 gap-x-5 gap-y-10">
+                            {data?.myRestaurant.restaurant?.menu.map((dish) => (
+                                <Dish name={dish.name} price={dish.price} description={dish.description} />
+                            ))}
+                        </div>
+
                     }
                 </div>
             </div>
