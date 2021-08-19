@@ -6,7 +6,7 @@ import { Link, useHistory } from "react-router-dom";
 import { CATEGORY_COVERIMG_DEFAUT, RESTAURANT_COVERIMG_DEFAUT } from "../../common/constants";
 import { capitalizeAllWords, capitalizeFirstLetter } from "../../common/utility";
 import { Categories } from "../../components/categories";
-import { RestaurantItem } from "../../components/restaurant";
+import { RestaurantItem } from "../../components/restaurant-item";
 import { SearchForm } from "../../components/search";
 import { CATEGORIES_QUERY, RESTAURANTS_QUERY } from "../../gql/gql-query";
 import { categoriesQuery } from "../../__generated__/categoriesQuery";

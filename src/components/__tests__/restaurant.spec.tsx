@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react";
 import React from "react";
-import { RestaurantItem } from "../restaurant";
+import { RestaurantItem } from "../restaurant-item";
 import { BrowserRouter as Router } from "react-router-dom";
 import { capitalizeAllWords } from "../../common/utility";
 

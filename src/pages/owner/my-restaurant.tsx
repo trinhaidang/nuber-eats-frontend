@@ -4,6 +4,18 @@ import { Link, useParams } from "react-router-dom"
 import { Dish } from "../../components/dish";
 import { MY_RESTAURANT_QUERY } from "../../gql/gql-query";
 import { myRestaurant, myRestaurantVariables } from "../../__generated__/myRestaurant";
+import {
+    VictoryAxis,
+    VictoryChart,
+    VictoryLabel,
+    VictoryLine,
+    VictoryPie,
+    VictoryTheme,
+    VictoryTooltip,
+    VictoryVoronoiContainer,
+} from "victory";
+
+
 
 interface IParams {
     id: string;
@@ -11,7 +23,6 @@ interface IParams {
 
 export const MyRestaurant = () => {
     const { id } = useParams<IParams>();
-
     const { data } = useQuery<myRestaurant, myRestaurantVariables>(
         MY_RESTAURANT_QUERY,
         {
@@ -21,6 +32,16 @@ export const MyRestaurant = () => {
         }
     );
     console.log(data);
+
+    const chartData = [
+        { x: 1, y: 300 },
+        { x: 2, y: 150 },
+        { x: 3, y: 425 },
+        { x: 4, y: 230 },
+        { x: 5, y: 715 },
+        { x: 6, y: 680 },
+        { x: 7, y: 310 },
+    ]
 
     return (
         <div className="mx-5">
@@ -44,7 +65,7 @@ export const MyRestaurant = () => {
                 <div className="mt-10">
                     {data?.myRestaurant.restaurant?.menu.length === 0 ?
                         <h4 className="text-xl mb-5">Please create a dish!</h4> :
-                        
+
                         <div className="grid mt-16 md:grid-cols-3 gap-x-5 gap-y-10">
                             {data?.myRestaurant.restaurant?.menu.map((dish) => (
                                 <Dish name={dish.name} price={dish.price} description={dish.description} />
@@ -53,6 +74,53 @@ export const MyRestaurant = () => {
 
                     }
                 </div>
+
+                {/* Victory Chart */}
+                {/* <div className="mt-20 mb-10">
+                    <h4 className="text-center text-2xl font-medium">Sales</h4>
+                    <div className="  mt-10">
+                        <VictoryChart
+                            height={500}
+                            theme={VictoryTheme.material}
+                            width={window.innerWidth}
+                            domainPadding={50}
+                            containerComponent={<VictoryVoronoiContainer />}
+                        >
+                            <VictoryLine
+                                labels={({ datum }) => `${datum.y} K`}
+                                labelComponent={
+                                    <VictoryTooltip
+                                        style={{ fontSize: 18 } as any}
+                                        renderInPortal
+                                        dy={-20}
+                                    />
+                                }
+                                data={data?.myRestaurant.restaurant?.orders.slice(Math.max(data?.myRestaurant.restaurant?.orders.length - 10, 0)).map((order) => ({
+                                    x: order.createdAt,
+                                    y: order.total,
+                                }))}
+                                interpolation="natural"
+                                style={{
+                                    data: {
+                                        strokeWidth: 5,
+                                    },
+                                }}
+                            />
+                            <VictoryAxis
+                                tickLabelComponent={<VictoryLabel renderInPortal />}
+                                // domainPadding={{x:10,y:20}}
+                                style={{
+                                    tickLabels: {
+                                        fontSize: 20,
+                                        angle: 90,
+                                        
+                                    } as any,
+                                }}
+                                tickFormat={(tick) => new Date(tick).toLocaleDateString("ko")}
+                            />
+                        </VictoryChart>
+                    </div>
+                </div> */}
             </div>
 
             {!data?.myRestaurant.restaurant.isValid &&

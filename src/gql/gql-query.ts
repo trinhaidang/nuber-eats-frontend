@@ -1,5 +1,5 @@
 import { gql } from "@apollo/client";
-import { CATEGORY_FRAGMENT, DISH_FRAGMENT, RESTAURANT_FRAGMENT } from "../gql/fragments";
+import { CATEGORY_FRAGMENT, DISH_FRAGMENT, ORDER_FRAGMENT, RESTAURANT_FRAGMENT } from "../gql/fragments";
 
 export const ME_QUERY = gql`
 query meQuery {
@@ -143,10 +143,26 @@ export const RESTAURANT_QUERY = gql`
             error
             restaurant {
                 ...RestaurantParts
+                menu {
+                    ...DishParts
+                }
             }
         }
     }
     ${RESTAURANT_FRAGMENT}
+    ${DISH_FRAGMENT}
+`;
+
+// MAKE Order QUERY
+
+export const CREATE_ORDER_MUTATION = gql`
+    mutation createOrder($input: CreateOrderInput!) {
+        createOrder(input: $input) {
+            ok
+            error
+            orderId
+        }
+    }
 `;
 
 
@@ -187,11 +203,15 @@ export const MY_RESTAURANT_QUERY = gql`
                 menu {
                     ...DishParts
                 }
+                orders {
+                    ...OrderParts
+                }
             }
         }
     }
     ${RESTAURANT_FRAGMENT}
     ${DISH_FRAGMENT}
+    ${ORDER_FRAGMENT}
 `;
 
 export const CREATE_DISH_MUTATION = gql`

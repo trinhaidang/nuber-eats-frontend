@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { RESTAURANT_COVERIMG_DEFAUT } from "../../common/constants";
-import { RestaurantItem } from "../../components/restaurant";
+import { RestaurantItem } from "../../components/restaurant-item";
 import { SearchForm } from "../../components/search";
 import { MY_RESTAURANTS_QUERY } from "../../gql/gql-query";
 import { myRestaurantsPageQuery, myRestaurantsPageQueryVariables } from "../../__generated__/myRestaurantsPageQuery";

@@ -4,7 +4,7 @@ import { Helmet } from "react-helmet-async";
 import { Link, useHistory, useLocation } from "react-router-dom"
 import { RESTAURANT_COVERIMG_DEFAUT } from "../../common/constants";
 import { Categories } from "../../components/categories";
-import { RestaurantItem } from "../../components/restaurant";
+import { RestaurantItem } from "../../components/restaurant-item";
 import { SearchForm } from "../../components/search";
 import { SEARCH_RESTAURANT } from "../../gql/gql-query";
 import { searchRestaurant, searchRestaurantVariables } from "../../__generated__/searchRestaurant";

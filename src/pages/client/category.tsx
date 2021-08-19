@@ -5,7 +5,7 @@ import { category, categoryVariables } from "../../__generated__/category";
 import { Helmet } from "react-helmet-async";
 import { useState } from "react";
 import { CATEGORY_COVERIMG_DEFAUT, RESTAURANT_COVERIMG_DEFAUT } from "../../common/constants";
-import { RestaurantItem } from "../../components/restaurant";
+import { RestaurantItem } from "../../components/restaurant-item";
 import { capitalizeAllWords } from "../../common/utility";
 
 
