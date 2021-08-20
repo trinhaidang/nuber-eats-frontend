@@ -1,5 +1,5 @@
 import { gql } from "@apollo/client";
-import { CATEGORY_FRAGMENT, DISH_FRAGMENT, ORDER_FRAGMENT, RESTAURANT_FRAGMENT } from "../gql/fragments";
+import { CATEGORY_FRAGMENT, DISH_FRAGMENT, FULL_ORDER_FRAGMENT, ORDER_FRAGMENT, RESTAURANT_FRAGMENT } from "../gql/fragments";
 
 export const ME_QUERY = gql`
 query meQuery {
@@ -47,6 +47,19 @@ export const VERIFY_EMAIL_MUTATION = gql`
             error
         }
     }
+`;
+
+export const GET_ORDER_QUERY = gql`
+    query getOrder($input: GetOrderInput!) {
+        getOrder(input: $input) {
+            ok
+            error
+            order {
+                ...FullOrderParts
+            }
+        }
+    }
+    ${FULL_ORDER_FRAGMENT}
 `;
 
 // -----------------  CLIENT QUERIES -----------------//
@@ -221,4 +234,17 @@ export const CREATE_DISH_MUTATION = gql`
             error
         }
     }
+`;
+
+
+
+// -----------------  SUBSCRIPTION QUERIES -----------------//
+
+export const ORDER_SUBSCRIPTION = gql`
+    subscription orderUpdates($input: OrderUpdatesInput!) {
+        orderUpdates(input: $input) {
+            ...FullOrderParts
+        }
+    }
+    ${FULL_ORDER_FRAGMENT}
 `;

@@ -14,31 +14,35 @@ import { MyRestaurants } from "../pages/owner/my-restaurants";
 import { AddRestaurant } from "../pages/owner/add-restaurant";
 import { MyRestaurant } from "../pages/owner/my-restaurant";
 import { AddDish } from "../pages/owner/add-dish";
-
-const ClientRoutes = [
-    <Route key="/" path="/" exact>
-        <Restaurants />
-    </Route>,
-    <Route key="/search" path="/search" >
-        <SearchRestaurant />
-    </Route>,
-    <Route key="/category/:slug" path="/category/:slug" >
-        <Category />
-    </Route>,
-    <Route key="/restaurant/:id" path="/restaurant/:id" >
-        <Restaurant />
-    </Route>,
-];
+import { Order } from "../pages/user/order";
 
 const UserRoutes = [
-    <Route key="/confirm" path="/confirm" >
+        <Route key="/confirm" path="/confirm" >
         <ConfirmEmail />
     </Route>,
     <Route key="/edit-profile" path="/edit-profile" >
         <EditProfile />
     </Route>,
+    <Route key="/orders/:id" path="/orders/:id" exact>
+        <Order />
+    </Route>,
     <Route key="/logout" path="/logout" >
         <Logout />
+    </Route>,
+];
+
+const ClientRoutes = [
+    <Route key="/" path="/" exact>
+        <Restaurants />
+    </Route>,
+    <Route key="/search" path="/search" exact>
+        <SearchRestaurant />
+    </Route>,
+    <Route key="/category/:slug" path="/category/:slug" exact>
+        <Category />
+    </Route>,
+    <Route key="/restaurant/:id" path="/restaurant/:id" exact>
+        <Restaurant />
     </Route>,
 ];
 

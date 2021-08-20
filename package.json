@@ -35,6 +35,7 @@
     "react-scripts": "4.0.3",
     "react-select": "^4.3.1",
     "rimraf": "^3.0.2",
+    "subscriptions-transport-ws": "^0.9.19",
     "tailwindcss": "^2.2.7",
     "typescript": "^4.3.5",
     "victory": "^35.10.1",

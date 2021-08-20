@@ -59,6 +59,7 @@ export const Restaurant = () => {
         }
     }
     const triggerConfirmOrder = () => {
+        if(placingOrder) return;
         if(orderItems.length === 0) {
             alert("You have not chosen an item");
             return;
