@@ -1,6 +1,7 @@
 import { useQuery, useSubscription } from "@apollo/client";
 import { faHamburger } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { useParams } from "react-router-dom"
 import { GET_ORDER_QUERY, ORDER_SUBSCRIPTION } from "../../gql/gql-query";
@@ -15,21 +16,35 @@ interface IParams {
 export const Order = () => {
     const params = useParams<IParams>();
 
-    const { data } = useQuery<getOrder, getOrderVariables>(
+    const { data, subscribeToMore } = useQuery<getOrder, getOrderVariables>(
         GET_ORDER_QUERY,
         {
             variables: { input: { id: +params.id } }
         }
-    )
-    console.log(data);
-
-    const { data: subscriptionData } = useSubscription<orderUpdates, orderUpdatesVariables>(
-        ORDER_SUBSCRIPTION,
-        {
-            variables: { input: { id: +params.id } }
+    );
+    useEffect(() => {
+        if(data?.getOrder.ok) {
+            subscribeToMore({
+                document: ORDER_SUBSCRIPTION,
+                variables: { input: { id: +params.id } },
+                updateQuery: (
+                    prev, 
+                    { subscriptionData: { data } }: { subscriptionData: { data: orderUpdates } }
+                ) => {
+                    if(!data) return prev;
+                    return {
+                        getOrder: {
+                            ...prev.getOrder,
+                            order: {
+                                ...data.orderUpdates,
+                            }
+                        }
+                    }
+                }
+            })
         }
-    )
-    console.log(subscriptionData);
+    }, [data]);
+
 
     return (
         <div className="mt-32 container flex justify-center px-5">
