@@ -15,6 +15,7 @@ import { AddRestaurant } from "../pages/owner/add-restaurant";
 import { MyRestaurant } from "../pages/owner/my-restaurant";
 import { AddDish } from "../pages/owner/add-dish";
 import { Order } from "../pages/user/order";
+import { Dashboard } from "../pages/driver/dashboard";
 
 const UserRoutes = [
         <Route key="/confirm" path="/confirm" >
@@ -61,6 +62,11 @@ const OwnerRoutes = [
     </Route>,
 ];
 
+const DriverRoutes = [
+    <Route key="/" path="/" exact>
+        <Dashboard />
+    </Route>,
+];
 
 export const LoggedInRouter = () => {
     const { data, loading, error } = useMe();
@@ -79,6 +85,7 @@ export const LoggedInRouter = () => {
             <Switch>
                 {data.me.role === UserRole.Client && ClientRoutes}
                 {data.me.role === UserRole.Owner && OwnerRoutes}
+                {data.me.role === UserRole.Delivery && DriverRoutes}
                 {UserRoutes}
                 <Route>
                     <NotFound />

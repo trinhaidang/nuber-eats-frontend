@@ -1,11 +1,14 @@
-import { useQuery, useSubscription } from "@apollo/client";
+import { useMutation, useQuery, useSubscription } from "@apollo/client";
 import { faHamburger } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { useParams } from "react-router-dom"
-import { GET_ORDER_QUERY, ORDER_SUBSCRIPTION } from "../../gql/gql-query";
+import { EDIT_ORDER_MUTATION, GET_ORDER_QUERY, ORDER_SUBSCRIPTION } from "../../gql/gql-query";
+import { useMe } from "../../hooks/useMe";
+import { editOrder, editOrderVariables } from "../../__generated__/editOrder";
 import { getOrder, getOrderVariables } from "../../__generated__/getOrder";
+import { OrderStatus, UserRole } from "../../__generated__/globalTypes";
 import { orderUpdates, orderUpdatesVariables } from "../../__generated__/orderUpdates";
 
 
@@ -15,6 +18,7 @@ interface IParams {
 
 export const Order = () => {
     const params = useParams<IParams>();
+    const { data: userData } = useMe();
 
     const { data, subscribeToMore } = useQuery<getOrder, getOrderVariables>(
         GET_ORDER_QUERY,
@@ -23,20 +27,20 @@ export const Order = () => {
         }
     );
     useEffect(() => {
-        if(data?.getOrder.ok) {
+        if (data?.getOrder.ok) {
             subscribeToMore({
                 document: ORDER_SUBSCRIPTION,
                 variables: { input: { id: +params.id } },
                 updateQuery: (
-                    prev, 
+                    prev,
                     { subscriptionData: { data } }: { subscriptionData: { data: orderUpdates } }
                 ) => {
-                    if(!data) return prev;
+                    if (!data) return prev;
                     return {
                         getOrder: {
                             ...prev.getOrder,
                             order: {
-                                ...data.orderUpdates,
+                                ...data.orderUpdates
                             }
                         }
                     }
@@ -45,6 +49,19 @@ export const Order = () => {
         }
     }, [data]);
 
+    const [editOrderMutation] = useMutation<editOrder, editOrderVariables>(
+        EDIT_ORDER_MUTATION
+    )
+    const onUpdateStatusClick = (newStatus: OrderStatus) => {
+        editOrderMutation({
+            variables: {
+                input: {
+                    id: +params.id,
+                    status: newStatus
+                }
+            }
+        });
+    }
 
     return (
         <div className="mt-32 container flex justify-center px-5">
@@ -94,9 +111,51 @@ export const Order = () => {
                             {data?.getOrder.order?.driver?.email || "Not yet."}
                         </span>
                     </div>
-                    <span className="text-center mt-5 mb-3 text-2xl text-lime-600">
-                        Status: {data?.getOrder.order?.status}
-                    </span>
+                    {userData?.me.role === UserRole.Client && (
+                        <span className="text-center mt-5 mb-3 text-2xl text-lime-600">
+                            Status: {data?.getOrder.order?.status}
+                        </span>
+                    )}
+                    {userData?.me.role === UserRole.Owner && (
+                        <>
+                            {data?.getOrder.order?.status === OrderStatus.Pending && (
+                                <button onClick={() => onUpdateStatusClick(OrderStatus.Cooking)} className="btn">Accept Order</button>
+                            )}
+                            {data?.getOrder.order?.status === OrderStatus.Cooking && (
+                                <button onClick={() => onUpdateStatusClick(OrderStatus.Cooked)} className="btn">Order Cooked</button>
+                            )}
+                            {data?.getOrder.order?.status !== OrderStatus.Pending
+                                && data?.getOrder.order?.status !== OrderStatus.Cooking
+                                && (
+                                    <span className="text-center mt-5 mb-3 text-2xl text-lime-600">
+                                        Status: {data?.getOrder.order?.status}
+                                    </span>
+                                )}
+                        </>
+                    )}
+                    {userData?.me.role === UserRole.Delivery && (
+                        <>
+                            {data?.getOrder.order?.status === OrderStatus.Cooked && (
+                                <button onClick={() => onUpdateStatusClick(OrderStatus.PickedUp)} className="btn">Picked Up</button>
+                            )}
+                            {data?.getOrder.order?.status === OrderStatus.PickedUp && (
+                                <button onClick={() => onUpdateStatusClick(OrderStatus.Delivered)} className="btn">Order Delivered</button>
+                            )}
+                            {data?.getOrder.order?.status !== OrderStatus.Cooked
+                                && data?.getOrder.order?.status !== OrderStatus.PickedUp
+                                && (
+                                    <span className="text-center mt-5 mb-3 text-2xl text-lime-600">
+                                        Status: {data?.getOrder.order?.status}
+                                    </span>
+                                )
+                            }
+                        </>
+                    )}
+                    {data?.getOrder.order?.status === OrderStatus.Delivered && (
+                        <span className="text-center mt-5 mb-3 text-2xl text-lime-600">
+                            Thank you for using GoPhuQuoc!
+                        </span>
+                    )}
                 </div>
             </div>
         </div>

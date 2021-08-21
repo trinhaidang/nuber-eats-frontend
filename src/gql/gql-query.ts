@@ -62,6 +62,15 @@ export const GET_ORDER_QUERY = gql`
     ${FULL_ORDER_FRAGMENT}
 `;
 
+export const EDIT_ORDER_MUTATION = gql`
+    mutation editOrder($input: EditOrderInput!) {
+        editOrder(input: $input) {
+            ok
+            error
+        }
+    }
+`;
+
 // -----------------  CLIENT QUERIES -----------------//
 
 export const CATEGORIES_QUERY = gql`
@@ -234,6 +243,27 @@ export const CREATE_DISH_MUTATION = gql`
             error
         }
     }
+`;
+
+// -----------------  DRIVER QUERIES -----------------//
+
+
+export const COOCKED_ORDERS_SUBSCRIPTION = gql`
+  subscription coockedOrders {
+    cookedOrders {
+      ...FullOrderParts
+    }
+  }
+  ${FULL_ORDER_FRAGMENT}
+`;
+
+export const TAKE_ORDER_MUTATION = gql`
+  mutation takeOrder($input: TakeOrderInput!) {
+    takeOrder(input: $input) {
+      ok
+      error
+    }
+  }
 `;
 
 

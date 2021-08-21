@@ -1,9 +1,9 @@
 import React from "react";
 import { useMe } from "../hooks/useMe";
-import nuberLogo from "../images/logo.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPowerOff, faStore, faUser } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
+import { LOGO_IMG } from "../common/constants";
 
 
 export const Header = () => {
@@ -17,7 +17,7 @@ export const Header = () => {
             )}
             <header className="py-4">
                 <div className="w-full px-5 xl:px-0 max-w-screen-2xl mx-auto flex justify-between items-center">
-                <Link to="/"><img src={nuberLogo} className="w-36" alt="Nuber Eats" /></Link>
+                <Link to="/"><img src={LOGO_IMG} className="w-36" alt="Nuber Eats" /></Link>
                     <div className="flex justify-between text-xs">
                         <Link to="/">
                             <FontAwesomeIcon icon={faStore} className="text-lg mx-4" />{" "}

@@ -22,6 +22,7 @@
     "axios": "^0.21.1",
     "browserify-fs": "^1.0.0",
     "file-saver": "^2.0.5",
+    "google-map-react": "^2.1.10",
     "graphql": "^14.7.0",
     "json": "^11.0.0",
     "jsontool": "^7.0.2",
@@ -73,6 +74,8 @@
   "devDependencies": {
     "@testing-library/cypress": "^8.0.0",
     "@types/file-saver": "^2.0.3",
+    "@types/google-map-react": "^2.1.2",
+    "@types/googlemaps": "^3.43.3",
     "@types/react-helmet": "^6.1.2",
     "@types/react-select": "^4.0.17",
     "cypress": "^8.2.0",
