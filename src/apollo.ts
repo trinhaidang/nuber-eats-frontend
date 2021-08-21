@@ -1,11 +1,11 @@
 import { ApolloClient, InMemoryCache, makeVar, createHttpLink, split } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
-import { LOCALSTORAGE_TOKEN, SERVER_URI, WS_URI } from "./common/constants";
+import { LOCALSTORAGE_TOKEN, PROD_SERVER_URI, PROD_WS_URI, SERVER_URI, WS_URI } from "./common/constants";
 import { WebSocketLink } from "@apollo/client/link/ws"
 import { getMainDefinition } from "@apollo/client/utilities";
 
 const httpLink = createHttpLink({
-    uri: SERVER_URI,
+    uri: process.env.NODE_ENV === "production" ? PROD_SERVER_URI : SERVER_URI,
 });
 
 const token = localStorage.getItem(LOCALSTORAGE_TOKEN);
@@ -26,7 +26,7 @@ const authLink = setContext((_, { headers }) => {
 });
 
 const wsLink = new WebSocketLink({
-    uri: WS_URI,
+    uri: process.env.NODE_ENV === "production" ? PROD_WS_URI : WS_URI,
     options: {
         reconnect: true,
         connectionParams: {

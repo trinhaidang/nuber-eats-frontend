@@ -10,3 +10,6 @@ export const CATEGORY_COVERIMG_DEFAUT = "/images/categories/default.png";
 // export const LOGO_IMG = "/images/logo.svg";
 export const LOGO_IMG = "/images/logo.png";
 export const MAX_FILE_SIZE = 10000;
+
+export const PROD_SERVER_URI = "https://go-phu-quoc-backend.herokuapp.com/graphql";
+export const PROD_WS_URI = "ws://go-phu-quoc-backend.herokuapp.com/graphql";
