@@ -144,7 +144,7 @@ export const Order = () => {
                             {data?.getOrder.order?.status !== OrderStatus.Cooked
                                 && data?.getOrder.order?.status !== OrderStatus.PickedUp
                                 && (
-                                    <span className="text-center mt-5 mb-3 text-2xl text-lime-600">
+                                    <span className="text-center mt-5 text-2xl text-lime-600">
                                         Status: {data?.getOrder.order?.status}
                                     </span>
                                 )
@@ -152,7 +152,7 @@ export const Order = () => {
                         </>
                     )}
                     {data?.getOrder.order?.status === OrderStatus.Delivered && (
-                        <span className="text-center mt-5 mb-3 text-2xl text-lime-600">
+                        <span className="text-center mb-3 text-2xl text-blue-600">
                             Thank you for using GoPhuQuoc!
                         </span>
                     )}
