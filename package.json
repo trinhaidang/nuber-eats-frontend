@@ -24,6 +24,7 @@
     "file-saver": "^2.0.5",
     "google-map-react": "^2.1.10",
     "graphql": "^14.7.0",
+    "joi": "^17.4.2",
     "json": "^11.0.0",
     "jsontool": "^7.0.2",
     "postcss": "^8.3.6",
