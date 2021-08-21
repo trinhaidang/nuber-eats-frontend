@@ -32,15 +32,18 @@ export const Dashboard = () => {
     }, [cookedOrdersData]);
 
     // Accept Order
-    const history = useHistory();
-    const [takeOrderMutation] = useMutation<takeOrder, takeOrderVariables>(
-        TAKE_ORDER_MUTATION
-    );
     const onCompleted = (data: takeOrder) => {
         if(data.takeOrder.ok) {
             history.push(`/orders/${cookedOrdersData?.cookedOrders.id}`);
         }
     }
+    const history = useHistory();
+    const [takeOrderMutation] = useMutation<takeOrder, takeOrderVariables>(
+        TAKE_ORDER_MUTATION,
+        {
+            onCompleted,
+        }
+    );
     const onAcceptClick = () => {
         if(cookedOrdersData) {
             takeOrderMutation({
@@ -48,8 +51,7 @@ export const Dashboard = () => {
                     input: {
                         id: cookedOrdersData?.cookedOrders.id
                     }
-                },
-                onCompleted
+                }
             });
         }
     }
