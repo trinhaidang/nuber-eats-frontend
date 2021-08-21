@@ -48,6 +48,7 @@
     "start": "npm run apollo:codegen & npm run tailwind:build & react-scripts start",
     "set-isolated-f": "json -I -f package.json -e \"this.compilerOptions.isolatedModules=false\"",
     "build": "react-scripts build",
+    "prebuild": "npm run tailwind:build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "test:coverage": "npm test -- --coverage --watchAll=false",
