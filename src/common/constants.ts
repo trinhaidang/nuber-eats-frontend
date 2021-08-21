@@ -7,5 +7,6 @@ export const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*
 
 export const RESTAURANT_COVERIMG_DEFAUT = "/images/restaurants/default.jpg";
 export const CATEGORY_COVERIMG_DEFAUT = "/images/categories/default.png";
-export const LOGO_IMG = "/images/logo.svg";
+// export const LOGO_IMG = "/images/logo.svg";
+export const LOGO_IMG = "/images/logo.png";
 export const MAX_FILE_SIZE = 10000;
